@@ -3,10 +3,10 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class Graph {
-	// 存储节点信息
-	private Object[] vertices;
 	// 存储边的信息
 	private int[][] arcs;
+	// 存储节点信息
+	private Object[] vertices;
 	private int vexnum;
 	// 记录第i个节点是否被访问过
 	private boolean[] visited;
@@ -14,31 +14,6 @@ public class Graph {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Graph g = new Graph(8);
-		Character[] vertices = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
-		g.addVertex(vertices);
-		g.addEdge(0, 1);
-		g.addEdge(0, 2);
-		g.addEdge(1, 3);
-		g.addEdge(1, 4);
-		g.addEdge(3, 7);
-		g.addEdge(4, 7);
-		g.addEdge(2, 5);
-		g.addEdge(2, 6);
-		System.out.println("深度优先遍历：");
-		g.depthTraverse();
-		System.out.println();
-
-		System.out.println("广度优先遍历：");
-		g.broadTraverse();
-		System.out.println();
-
-		System.out.println("深度优先遍历非递归：");
-		g.depth();
-		System.out.println();
-	}
 
 	public Graph(int n) {
 		vexnum = n;
@@ -53,10 +28,6 @@ public class Graph {
 
 	}
 
-	public void addVertex(Object[] obj) {
-		this.vertices = obj;
-	}
-
 	public void addEdge(int i, int j) {
 		if (i == j)
 			return;
@@ -64,42 +35,8 @@ public class Graph {
 		arcs[j][i] = 1;
 	}
 
-	public int firstAdjVex(int i) {
-		for (int j = 0; j < vexnum; j++) {
-			if (arcs[i][j] > 0)
-				return j;
-		}
-		return -1;
-	}
-
-	public int nextAdjVex(int i, int k) {
-		for (int j = k + 1; j < vexnum; j++) {
-			if (arcs[i][j] > 0)
-				return j;
-		}
-		return -1;
-	}
-
-	// 深度优先遍历
-	public void depthTraverse() {
-		for (int i = 0; i < vexnum; i++) {
-			visited[i] = false;
-		}
-		for (int i = 0; i < vexnum; i++) {
-			if (!visited[i])
-				traverse(i);
-		}
-	}
-
-	// 一个连通图的深度递归遍历
-	public void traverse(int i) {
-		// TODO Auto-generated method stub
-		visited[i] = true;
-		visit(i);
-		for (int j = this.firstAdjVex(i); j >= 0; j = this.nextAdjVex(i, j)) {
-			if (!visited[j])
-				this.traverse(j);
-		}
+	public void addVertex(Object[] obj) {
+		this.vertices = obj;
 	}
 
 	// 广度优先遍历
@@ -131,11 +68,6 @@ public class Graph {
 		}
 	}
 
-	private void visit(int i) {
-		// TODO Auto-generated method stub
-		System.out.print(vertices[i] + " ");
-	}
-
 	// 深度非递归遍历
 	public void depth() {
 		Stack<Integer> s = new Stack<Integer>();
@@ -162,6 +94,25 @@ public class Graph {
 		}
 	}
 
+	// 深度优先遍历
+	public void depthTraverse() {
+		for (int i = 0; i < vexnum; i++) {
+			visited[i] = false;
+		}
+		for (int i = 0; i < vexnum; i++) {
+			if (!visited[i])
+				traverse(i);
+		}
+	}
+
+	public int firstAdjVex(int i) {
+		for (int j = 0; j < vexnum; j++) {
+			if (arcs[i][j] > 0)
+				return j;
+		}
+		return -1;
+	}
+
 	// 最后一个
 	public int lastAdjVex(int i) {
 		for (int j = vexnum - 1; j >= 0; j--) {
@@ -178,5 +129,29 @@ public class Graph {
 				return j;
 		}
 		return -1;
+	}
+
+	public int nextAdjVex(int i, int k) {
+		for (int j = k + 1; j < vexnum; j++) {
+			if (arcs[i][j] > 0)
+				return j;
+		}
+		return -1;
+	}
+
+	// 一个连通图的深度递归遍历
+	public void traverse(int i) {
+		// TODO Auto-generated method stub
+		visited[i] = true;
+		visit(i);
+		for (int j = this.firstAdjVex(i); j >= 0; j = this.nextAdjVex(i, j)) {
+			if (!visited[j])
+				this.traverse(j);
+		}
+	}
+
+	private void visit(int i) {
+		// TODO Auto-generated method stub
+		System.out.print(vertices[i] + " ");
 	}
 }
