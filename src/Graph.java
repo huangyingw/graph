@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class Graph {
 	// 存储边的信息
-	private int[][] arcs;
+	private int[][] edges;
 	// 存储节点信息
 	private Object[] vertices;
 	private int vexnum;
@@ -18,11 +18,11 @@ public class Graph {
 	public Graph(int n) {
 		vexnum = n;
 		vertices = new Object[n];
-		arcs = new int[n][n];
+		edges = new int[n][n];
 		visited = new boolean[n];
 		for (int i = 0; i < vexnum; i++) {
 			for (int j = 0; j < vexnum; j++) {
-				arcs[i][j] = 0;
+				edges[i][j] = 0;
 			}
 		}
 
@@ -31,8 +31,8 @@ public class Graph {
 	public void addEdge(int i, int j) {
 		if (i == j)
 			return;
-		arcs[i][j] = 1;
-		arcs[j][i] = 1;
+		edges[i][j] = 1;
+		edges[j][i] = 1;
 	}
 
 	public void addVertex(Object[] obj) {
@@ -94,6 +94,54 @@ public class Graph {
 		}
 	}
 
+	// public void DFS(Object v){
+	// setLabel(v, "VISITED");
+	// // startVertexVisit(v);
+	// for (all e ==incidentEdges(v){
+	// if getLabel(e) = "UNEXPLORED") {
+	// w ==opposite(v, e)
+	// if (getLabel(w) = "UNEXPLORED") {
+	// // preDiscoveryTraversal(v, e, w)
+	// setLabel(e, "DISCOVERY")
+	// DFS( w)
+	// // postDiscoveryTraversal(v, e, w)
+	// else
+	// setLabel(e, "BACK")
+	// // backEdgeTraversal (v, e, w)
+	// // finishVertexVisit(v)
+	// }
+	//
+	// private void setLabel(Object v, String string) {
+	// // TODO Auto-generated method stub
+	//
+	// }
+
+	// public void DFS(){
+	// // initResult( )
+	// for (Object u : vertices()) {
+	// setLabel(u, "UNEXPLORED");
+	// }
+	//
+	// for (all e ==edges())
+	// setLabel(e, "UNEXPLORED");
+	// for (all v ==vertices())
+	// if (getLabel(v) = "UNEXPLORED")
+	// // preComponentVisit(v)
+	// DFS(v);
+	// // postComponentVisit(v)
+	// result();
+	// }
+
+	private Object[] edges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object[] vertices() {
+		// TODO Auto-generated method stub
+		return vertices;
+	}
+
 	// 深度优先遍历
 	public void depthTraverse() {
 		for (int i = 0; i < vexnum; i++) {
@@ -107,7 +155,7 @@ public class Graph {
 
 	public int firstAdjVex(int i) {
 		for (int j = 0; j < vexnum; j++) {
-			if (arcs[i][j] > 0)
+			if (edges[i][j] > 0)
 				return j;
 		}
 		return -1;
@@ -116,7 +164,7 @@ public class Graph {
 	// 最后一个
 	public int lastAdjVex(int i) {
 		for (int j = vexnum - 1; j >= 0; j--) {
-			if (arcs[i][j] > 0)
+			if (edges[i][j] > 0)
 				return j;
 		}
 		return -1;
@@ -125,7 +173,7 @@ public class Graph {
 	// 上一个
 	public int lastAdjVex(int i, int k) {
 		for (int j = k - 1; j >= 0; j--) {
-			if (arcs[i][j] > 0)
+			if (edges[i][j] > 0)
 				return j;
 		}
 		return -1;
@@ -133,7 +181,7 @@ public class Graph {
 
 	public int nextAdjVex(int i, int k) {
 		for (int j = k + 1; j < vexnum; j++) {
-			if (arcs[i][j] > 0)
+			if (edges[i][j] > 0)
 				return j;
 		}
 		return -1;
