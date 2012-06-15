@@ -39,6 +39,11 @@ public class Graph {
 		this.vertices = obj;
 	}
 
+	private void backEdgeTraversal(Object v, Object e, Object w) {
+		// TODO Auto-generated method stub
+
+	}
+
 	// 广度优先遍历
 	public void broadTraverse() {
 		// LinkedList实现了Queue接口
@@ -94,83 +99,6 @@ public class Graph {
 		}
 	}
 
-	public void DFS(Object v) {
-		Object w = null;
-		setLabel(v, "VISITED");
-		// startVertexVisit(v);
-		for (Object e : incidentEdges(v)) {
-			if (getLabel(e) == "UNEXPLORED") {
-				w = opposite(v, e);
-			}
-
-			if (getLabel(w) == "UNEXPLORED") {
-				// preDiscoveryTraversal(v, e, w)
-				setLabel(e, "DISCOVERY");
-				DFS(w);
-				// postDiscoveryTraversal(v, e, w)
-			} else {
-				setLabel(e, "BACK");
-				// backEdgeTraversal (v, e, w)
-			}
-		}
-		finishVertexVisit(v);
-	}
-
-	private void finishVertexVisit(Object v) {
-		// TODO Auto-generated method stub
-
-	}
-
-	private Object opposite(Object v, Object e) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private Object[] incidentEdges(Object v) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void setLabel(Object v, String string) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void DFS() {
-		// initResult( )
-		for (Object u : vertices()) {
-			setLabel(u, "UNEXPLORED");
-		}
-		for (Object e : edges()) {
-			setLabel(e, "UNEXPLORED");
-		}
-		for (Object v : vertices())
-			if (getLabel(v) == "UNEXPLORED")
-				// preComponentVisit(v)
-				DFS(v);
-		// postComponentVisit(v)
-		result();
-	}
-
-	public String getLabel(Object v) {
-		return null;
-	}
-
-	private void result() {
-		// TODO Auto-generated method stub
-
-	}
-
-	private Object[] edges() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object[] vertices() {
-		// TODO Auto-generated method stub
-		return vertices;
-	}
-
 	// 深度优先遍历
 	public void depthTraverse() {
 		for (int i = 0; i < vexnum; i++) {
@@ -182,12 +110,75 @@ public class Graph {
 		}
 	}
 
+	public void DFS() {
+		initResult();
+		for (Object u : vertices()) {
+			setLabel(u, "UNEXPLORED");
+		}
+		for (Object e : edges()) {
+			setLabel(e, "UNEXPLORED");
+		}
+		for (Object v : vertices()) {
+			if (getLabel(v) == "UNEXPLORED") {
+				preComponentVisit(v);
+				DFS(v);
+				postComponentVisit(v);
+			}
+		}
+		result();
+	}
+
+	public void DFS(Object v) {
+		Object w = null;
+		setLabel(v, "VISITED");
+		startVertexVisit(v);
+		for (Object e : incidentEdges(v)) {
+			if (getLabel(e) == "UNEXPLORED") {
+				w = opposite(v, e);
+			}
+			if (getLabel(w) == "UNEXPLORED") {
+				preDiscoveryTraversal(v, e, w);
+				setLabel(e, "DISCOVERY");
+				DFS(w);
+				postDiscoveryTraversal(v, e, w);
+			} else {
+				setLabel(e, "BACK");
+				backEdgeTraversal(v, e, w);
+			}
+		}
+		finishVertexVisit(v);
+	}
+
+	private Object[] edges() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private void finishVertexVisit(Object v) {
+		// TODO Auto-generated method stub
+
+	}
+
 	public int firstAdjVex(int i) {
 		for (int j = 0; j < vexnum; j++) {
 			if (edges[i][j] > 0)
 				return j;
 		}
 		return -1;
+	}
+
+	public String getLabel(Object v) {
+		return null;
+	}
+
+	private Object[] incidentEdges(Object v) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private void initResult() {
+		// TODO Auto-generated method stub
+
 	}
 
 	// 最后一个
@@ -216,6 +207,46 @@ public class Graph {
 		return -1;
 	}
 
+	private Object opposite(Object v, Object e) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private void postComponentVisit(Object v) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void postDiscoveryTraversal(Object v, Object e, Object w) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void preComponentVisit(Object v) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void preDiscoveryTraversal(Object v, Object e, Object w) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void result() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void setLabel(Object v, String string) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void startVertexVisit(Object v) {
+		// TODO Auto-generated method stub
+
+	}
+
 	// 一个连通图的深度递归遍历
 	public void traverse(int i) {
 		// TODO Auto-generated method stub
@@ -225,6 +256,11 @@ public class Graph {
 			if (!visited[j])
 				this.traverse(j);
 		}
+	}
+
+	public Object[] vertices() {
+		// TODO Auto-generated method stub
+		return vertices;
 	}
 
 	private void visit(int i) {
