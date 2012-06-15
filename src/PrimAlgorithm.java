@@ -10,6 +10,7 @@ public class PrimAlgorithm {
 		prim.createTree(4, 4);
 		prim.prim();
 	}
+
 	private AdMatrixGraph graph;
 	private int index = -1;
 
