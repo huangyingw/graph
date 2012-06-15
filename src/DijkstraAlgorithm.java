@@ -4,19 +4,26 @@
  */
 public class DijkstraAlgorithm {
 
-	private AdMatrixGraph graph;
-	// 用于存放S集合
-	private int[] s = null;
+	public static void main(String[] args) {
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm();
+		dijkstra.createTree(5, 6);
+		dijkstra.dijkstra();
+	}
+
 	// 当前节点
 	private int currentNode = 0;
-	// 目的节点
-	private int targetNode = 0;
+	private AdMatrixGraph graph;
+	private int index = -1;
+	private int index1 = -1;
 	// 用于记录
 	private int[] pre;
 	// 用于记录各个节点与当前节点的距离
 	private int[] record;
-	private int index = -1;
-	private int index1 = -1;
+	// 用于存放S集合
+	private int[] s = null;
+
+	// 目的节点
+	private int targetNode = 0;
 
 	public void createTree(int nodenum, int cirnum) {
 		graph = new AdMatrixGraph(nodenum, cirnum);
@@ -51,31 +58,6 @@ public class DijkstraAlgorithm {
 		record[0] = 0;
 	}
 
-	public boolean isContain(int j) {
-		for (int i = 0; i <= index; i++) {
-			if (s[i] == j) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	// 找到最近的点
-	public int getNearest() {
-		int minIndex = -1;
-		int minValue = Integer.MAX_VALUE;
-		for (int i = 0; i < this.graph.getNodenum(); i++) {
-			if (isContain(i)) {
-				continue;
-			}
-			if (record[i] < minValue) {
-				minValue = record[i];
-				minIndex = i;
-			}
-		}
-		return minIndex;
-	}
-
 	// Dijkstra算法
 	public void dijkstra() {
 		while (!(index == this.graph.getNodenum() - 1)) {
@@ -103,9 +85,28 @@ public class DijkstraAlgorithm {
 		System.out.println();
 	}
 
-	public static void main(String[] args) {
-		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm();
-		dijkstra.createTree(5, 6);
-		dijkstra.dijkstra();
+	// 找到最近的点
+	public int getNearest() {
+		int minIndex = -1;
+		int minValue = Integer.MAX_VALUE;
+		for (int i = 0; i < this.graph.getNodenum(); i++) {
+			if (isContain(i)) {
+				continue;
+			}
+			if (record[i] < minValue) {
+				minValue = record[i];
+				minIndex = i;
+			}
+		}
+		return minIndex;
+	}
+
+	public boolean isContain(int j) {
+		for (int i = 0; i <= index; i++) {
+			if (s[i] == j) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
