@@ -112,8 +112,8 @@ public class Graph {
 
 	public void DFS() {
 		initResult();
-		for (Object u : vertices()) {
-			setLabel(u, "UNEXPLORED");
+		for (Vertice u : vertices()) {
+			u.setLabel("UNEXPLORED");
 		}
 		for (Object e : edges()) {
 			setLabel(e, "UNEXPLORED");
@@ -258,7 +258,7 @@ public class Graph {
 		}
 	}
 
-	public Object[] vertices() {
+	public Vertice[] vertices() {
 		// TODO Auto-generated method stub
 		return vertices;
 	}

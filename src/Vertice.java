@@ -10,4 +10,9 @@ public class Vertice {
 	public String toString() {
 		return name.toString();
 	}
+
+	public void setLabel(String string) {
+		// TODO Auto-generated method stub
+		label = string;
+	}
 }
