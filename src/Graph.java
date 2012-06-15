@@ -6,7 +6,7 @@ public class Graph {
 	// 存储边的信息
 	private int[][] edges;
 	// 存储节点信息
-	private Object[] vertices;
+	private Vertice[] vertices;
 	private int vexnum;
 	// 记录第i个节点是否被访问过
 	private boolean[] visited;
@@ -17,7 +17,7 @@ public class Graph {
 
 	public Graph(int n) {
 		vexnum = n;
-		vertices = new Object[n];
+		vertices = new Vertice[n];
 		edges = new int[n][n];
 		visited = new boolean[n];
 		for (int i = 0; i < vexnum; i++) {
@@ -35,7 +35,7 @@ public class Graph {
 		edges[j][i] = 1;
 	}
 
-	public void addVertex(Object[] obj) {
+	public void addVertex(Vertice[] obj) {
 		this.vertices = obj;
 	}
 

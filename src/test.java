@@ -2,7 +2,9 @@ public class test {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Graph g = new Graph(8);
-		Character[] vertices = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
+		Vertice[] vertices = { new Vertice('A'), new Vertice('B'),
+				new Vertice('C'), new Vertice('D'), new Vertice('E'),
+				new Vertice('F'), new Vertice('G'), new Vertice('H') };
 		g.addVertex(vertices);
 		g.addEdge(0, 1);
 		g.addEdge(0, 2);

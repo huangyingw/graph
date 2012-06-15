@@ -1,4 +1,13 @@
 public class Vertice {
-	private String name;
+	private Character name;
 	private String label;
+
+	public Vertice(Character name) {
+		super();
+		this.name = name;
+	}
+
+	public String toString() {
+		return name.toString();
+	}
 }
